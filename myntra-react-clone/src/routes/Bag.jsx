@@ -12,16 +12,26 @@ const Bag = () => {
   const items = useSelector(store => store.item);
   const bagItems = useSelector(store => store.bagStatus);
   const finalItems = items.filter(item => {
-    const itemIndex = bagItems.items.indexOf(item.id);
-    return itemIndex >= 0;
+    return bagItems.items.some(bagItem => bagItem.id === item.id);
   });
+  
+  console.log("Final Items:", finalItems); 
+  
+  const finalBagItems = finalItems.map((item) => {
+    const bagItem = bagItems.items.find(bagItem => bagItem.id === item.id);
+    return {
+      ...item,
+      quantity: bagItem.quantity,
+    };
+  });
+  console.log("Final Bag Items:", finalBagItems);
 
   return (
     <main>
       <div className="bag-page">
           <div className="bag-items-container">
           {
-            finalItems.map((finalitem) => (
+            finalBagItems.map((finalitem) => (
             <BagItems key = {finalitem.id} item={finalitem} />
           ))
           }
@@ -34,4 +44,4 @@ const Bag = () => {
   )
 }
 
-export default Bag
+export default Bag;
