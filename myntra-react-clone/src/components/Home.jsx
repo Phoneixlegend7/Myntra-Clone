@@ -18,10 +18,14 @@ const Home = ({item}) => {
     dispatch(addItemToBag(item.id));
   }
   const handleRemoveFromBag =() =>{
-    if(bagCount.bagCount == 0){
-      setShowOptions(false);
+    if (bagCount.bagCount <= 1) {
+      // If the current count is 1, removing an item will result in 0
+      dispatch(resetBag());
+      setShowOptions(false); // Hide the options
+    } else {
+      // Otherwise, just decrease the count
+      dispatch(resetBag());
     }
-    else dispatch(resetBag());
   }
   return (
     <div className="item-container">
@@ -39,12 +43,11 @@ const Home = ({item}) => {
       {!showOptions ? 
         <button className="btn-add-bag" onClick ={handleaddItemBag} >Add in Bag</button> : 
         <div className="add-remove-buttons">
-          <button className="btn btn-success btn-lg buts" type="button" onClick={handleIncrementBag}>{<FaPlus />}</button>
-          <button className="btn btn-danger btn-lg buts " type="button" onClick=  {handleRemoveFromBag}>{<FaMinus />}</button>
+          <button className="btn btn-success  buts" type="button" onClick={handleIncrementBag}>{<FaPlus />}</button>
+          <button className="btn btn-danger  buts " type="button" onClick=  {handleRemoveFromBag}>{<FaMinus />}</button>
         </div>
       
       }
-      
     </div>
   )
 }
