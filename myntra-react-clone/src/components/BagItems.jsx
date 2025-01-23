@@ -17,6 +17,8 @@ const BagItems = ({item}) => {
   //   }
   // }
 
+  console.log("Bag Item:", item);
+
   const dispatch = useDispatch();
   const handleRemoveItem = () => {
     dispatch(removeBagItems(item.id));
@@ -41,6 +43,9 @@ const BagItems = ({item}) => {
         Delivery by
         <span className="delivery-details-days">{item.delivery_date}</span>
       </div>
+      <div className="item-count">
+          Count: <span className="count">{item.quantity}</span>
+        </div>
     </div>
 
     <div className="remove-from-cart" onClick={handleRemoveItem}>X</div>

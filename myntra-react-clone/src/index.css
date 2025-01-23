@@ -215,6 +215,15 @@ header {
   width: 100px;
 }
 
+.item-count {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.item-count .count {
+  color: #ff5722;
+}
+
 .current-price {
   font-size: 14px;
   font-weight: 700;
